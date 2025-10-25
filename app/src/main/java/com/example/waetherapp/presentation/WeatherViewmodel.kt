@@ -10,9 +10,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.waetherapp.data.remote.dto.WeatherDto
 import com.example.waetherapp.domain.repository.weather.WeatherRepository
 import com.example.waetherapp.util.Resultt
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WeatherViewmodel(
+@HiltViewModel
+class WeatherViewmodel @Inject constructor(
     private val weatherRepository: WeatherRepository
 ): ViewModel() {
     var city by mutableStateOf("")

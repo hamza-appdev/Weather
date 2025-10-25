@@ -22,21 +22,29 @@ import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBarItemDefaults.colors
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.waetherapp.R
 import com.example.waetherapp.data.remote.dto.WeatherDto
+import com.example.waetherapp.ui.theme.CloudWhite
+import com.example.waetherapp.ui.theme.LightBlue
+import com.example.waetherapp.ui.theme.SkyBlue
+import io.ktor.websocket.Frame
 
 @Composable
 fun searchbar(
@@ -56,38 +64,54 @@ fun searchbar(
             value = city,
             onValueChange = onCityChange,
             modifier = Modifier.weight(1f),
-            placeholder = {Text("Enter city name")},
+            placeholder = {Text("Enter city name", color = Color.White)},
             singleLine = true,
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.outline,
-                focusedContainerColor = MaterialTheme.colorScheme.surface,
-                unfocusedContainerColor = MaterialTheme.colorScheme.surface
+                focusedBorderColor = CloudWhite,
+                unfocusedBorderColor = CloudWhite,
+                focusedContainerColor =  CloudWhite.copy(alpha = 0.2f),
+                unfocusedContainerColor = CloudWhite.copy(alpha = 0.2f),
+               cursorColor = Color.White,
+                focusedTextColor = Color.White,
+                unfocusedTextColor = Color.White,
+
+                ),
+            textStyle = TextStyle(
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
             )
+
         )
 
         Button(
             onClick = onSearchClick,
             modifier = Modifier.height(56.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary
+                containerColor = CloudWhite
             )
         ) {
             Text("Search")
         }
     }
 }
-
 @Composable
 fun Weathercard(
     modifier: Modifier = Modifier,
     weatherDto: WeatherDto
     ) {
+    Spacer(modifier= Modifier.height(40.dp))
     val temperature = weatherDto.main.temp.toInt()
     val weathercondition = weatherDto.weather.firstOrNull()?.main?:"unknown"
     val weatherdescription = weatherDto.weather.firstOrNull()?.description?:"unknown"
     val humidity = weatherDto.main.humidity
     val windSpeed = weatherDto.wind.speed
+
+    val gradientColors = listOf(
+        SkyBlue.copy(alpha = 0.7f ),
+        LightBlue.copy(alpha = 0.8f ),
+        CloudWhite.copy(alpha = 0.6f)
+    )
+
 
     Card(
         modifier= Modifier
@@ -101,10 +125,7 @@ fun Weathercard(
                 .fillMaxWidth()
                 .background(
                     brush = Brush.verticalGradient(
-                        colors = listOf(
-                            MaterialTheme.colorScheme.primaryContainer,
-                            MaterialTheme.colorScheme.secondaryContainer
-                        )
+                        colors = gradientColors
                     )
                 )
                 .padding(20.dp)

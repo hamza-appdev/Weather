@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
+import com.example.waetherapp.ui.theme.CloudWhite
 
 @Composable
 fun LoadingAnimation(modifier: Modifier = Modifier) {
@@ -47,7 +48,7 @@ fun LoadingAnimation(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .size(16.dp)
                     .scale(if (index == 1) scale else 1f)
-                    .background(MaterialTheme.colorScheme.primary, CircleShape)
+                    .background(CloudWhite, CircleShape)
                     .padding(4.dp)
             )
         }

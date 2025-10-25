@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -47,6 +48,8 @@ import com.example.waetherapp.presentation.components.LoadingAnimation
 import com.example.waetherapp.presentation.components.Weathercard
 import com.example.waetherapp.presentation.components.searchbar
 import com.example.waetherapp.ui.theme.CloudWhite
+import com.example.waetherapp.ui.theme.LightBlue
+import com.example.waetherapp.ui.theme.SkyBlue
 import com.example.waetherapp.util.Resultt
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -64,7 +67,7 @@ fun WeatherScreen(viewModel: WeatherViewmodel) {
         }
     }
     Scaffold (
-        snackbarHost ={SnackbarHost(snackbarHoststate)},
+        snackbarHost ={SnackbarHost(snackbarHoststate,modifier = Modifier.padding(bottom = 40.dp))},
         topBar = {
             androidx.compose.material3.TopAppBar(
                 title = {
@@ -76,7 +79,7 @@ fun WeatherScreen(viewModel: WeatherViewmodel) {
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
+                    containerColor = CloudWhite,
                 )
             )
         }
@@ -148,13 +151,13 @@ fun Emptystate(modifier: Modifier = Modifier) {
           modifier= Modifier
               .size(120.dp)
               .clip(RoundedCornerShape(10.dp))
-              .background(MaterialTheme.colorScheme.primaryContainer),
+              .background(CloudWhite),
           contentAlignment = Alignment.Center
       ){
          Icon( painter = painterResource(id = R.drawable.ic_weather),
              contentDescription = "",
          modifier= Modifier.size(65.dp),
-             tint = MaterialTheme.colorScheme.onPrimaryContainer,
+             tint = LightBlue,
 
          )
       }

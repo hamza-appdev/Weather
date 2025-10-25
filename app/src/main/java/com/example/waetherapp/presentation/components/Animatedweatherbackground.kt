@@ -38,9 +38,9 @@ fun Animatedweatherbackground(
     )
 
     val gradientColors = listOf(
-        SkyBlue.copy(alpha = 0.8f + (coloranimation * 0.2f)),
-        LightBlue.copy(alpha = 0.7f + (coloranimation * 0.3f)),
-        CloudWhite.copy(alpha = 0.9f)
+        SkyBlue.copy(alpha = 0.7f + (coloranimation * 0.2f)),
+        LightBlue.copy(alpha = 0.8f + (coloranimation * 0.3f)),
+        CloudWhite.copy(alpha = 0.6f)
     )
 
     Box (

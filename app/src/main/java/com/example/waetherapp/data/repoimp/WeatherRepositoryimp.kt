@@ -8,8 +8,9 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import java.lang.Exception
+import javax.inject.Inject
 
-class WeatherRepositoryimp(
+class WeatherRepositoryimp @Inject constructor(
     private val apiservices: Weatherapiservices
 ): WeatherRepository{
     val apikey = BuildConfig.API_KEY
