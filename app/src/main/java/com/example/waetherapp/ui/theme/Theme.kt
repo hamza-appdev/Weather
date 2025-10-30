@@ -63,16 +63,6 @@ fun WaetherAppTheme(
         darkTheme ->   DarkColorScheme
         else -> LightColorScheme
     }
-    // 👇 System bar control (status & nav bar)
-    val systemUiController = rememberSystemUiController()
-    val useDarkIcons = !darkTheme
-
-    SideEffect {
-        systemUiController.setSystemBarsColor(
-            color = if (darkTheme) Color.Black else Color.White, // 👈 change status bar color
-
-        )
-    }
 
 
     MaterialTheme(

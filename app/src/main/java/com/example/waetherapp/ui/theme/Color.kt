@@ -11,20 +11,6 @@ val SunnyYellow = Color(0xFFFFCA28)
 val LightGray = Color(0xFFE0E0E0)
 val RainyBlue = Color(0xFF42A5F5)
 
-// Dark Theme Colors
-////val DeepBlue = Color(0xFF1976D2)
-//val DeepBlue = Color(0xFF2776A1)
-//val NightBlue = Color(0xFF084CAB)
-////val DarkGray = Color(0xFF424242)
-//val DarkGray = Color(0xFF000000)
-//val MoonYellow = Color(0xFFFFC107)
-//val StormGray = Color(0xFF424242)
-//
-//val DarkNightBlue = Color(0xFF034783)  // very dark navy
-//val DeepSpaceBlue = Color(0xFF21A4C2)  // slightly brighter navy
-//val MidnightGray = Color(0xFF497E9A)   // dark gray-blue mix
-
-
 
 
 // 🌌 Main Theme Colors

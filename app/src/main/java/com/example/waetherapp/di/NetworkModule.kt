@@ -33,9 +33,9 @@ object NetworkModule {
                 })
             }
             install(HttpTimeout){
-                socketTimeoutMillis=3000
-                requestTimeoutMillis=3000
-                connectTimeoutMillis=3000
+                socketTimeoutMillis=5000
+                requestTimeoutMillis=5000
+                connectTimeoutMillis=5000
             }
             install(DefaultRequest){
                 url{
