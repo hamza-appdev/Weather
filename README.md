@@ -27,10 +27,9 @@ Displays weather, forecast, and simple UI components using Compose.
 <img width="1920" height="900" alt="Untitled design (4)" src="https://github.com/user-attachments/assets/ebc2f789-8edc-421e-a764-782ea721de83" />
 
 ---
-- An API key from your weather provider (e.g., OpenWeatherMap, WeatherAPI, etc.)
 
 ### Add API key (recommended approaches)
-
+- An API key from your weather provider (e.g., OpenWeatherMap, WeatherAPI, etc.)
 
 ---
 
