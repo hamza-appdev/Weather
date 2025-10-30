@@ -13,7 +13,7 @@ import javax.inject.Inject
 class WeatherRepositoryimp @Inject constructor(
     private val apiservices: Weatherapiservices
 ): WeatherRepository{
-    val apikey = BuildConfig.API_KEY
+    val apiKey = BuildConfig.API_KEY
 
     override suspend fun getWeather(city: String): WeatherDto {
      return try {
@@ -21,7 +21,7 @@ class WeatherRepositoryimp @Inject constructor(
 //         .body() converts (or deserializes) that response into a Kotlin object.
          apiservices.client.get("/data/2.5/weather"){
              parameter("q", city)
-             parameter("appid",apikey)
+             parameter("appid",apiKey)
          }.body()
      }catch (e: Exception){
        e.printStackTrace()

@@ -1,7 +1,9 @@
 package com.example.waetherapp.presentation.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,10 +44,15 @@ import androidx.compose.ui.unit.sp
 import com.example.waetherapp.R
 import com.example.waetherapp.data.remote.dto.WeatherDto
 import com.example.waetherapp.ui.theme.CloudWhite
+import com.example.waetherapp.ui.theme.DeepBlue
 import com.example.waetherapp.ui.theme.LightBlue
+import com.example.waetherapp.ui.theme.LightGray
+import com.example.waetherapp.ui.theme.RainyBlue
 import com.example.waetherapp.ui.theme.SkyBlue
+import com.example.waetherapp.ui.theme.StormGray
 import io.ktor.websocket.Frame
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun searchbar(
     modifier: Modifier= Modifier,
@@ -53,7 +60,8 @@ fun searchbar(
     onCityChange:(String)-> Unit,
     onSearchClick:()->Unit,
 ){
-    Row(
+    val textColor = if (isSystemInDarkTheme()) LightBlue  else LightBlue
+            Row(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp),
@@ -64,22 +72,24 @@ fun searchbar(
             value = city,
             onValueChange = onCityChange,
             modifier = Modifier.weight(1f),
-            placeholder = {Text("Enter city name", color = Color.White)},
+            placeholder = {Text("Enter city name", color = textColor)},
             singleLine = true,
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = CloudWhite,
                 unfocusedBorderColor = CloudWhite,
                 focusedContainerColor =  CloudWhite.copy(alpha = 0.2f),
                 unfocusedContainerColor = CloudWhite.copy(alpha = 0.2f),
-               cursorColor = Color.White,
-                focusedTextColor = Color.White,
-                unfocusedTextColor = Color.White,
+               cursorColor =textColor,
+                focusedTextColor = textColor,
+                unfocusedTextColor = textColor,
 
                 ),
             textStyle = TextStyle(
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
+                fontSize = 17.sp,
+                fontWeight = FontWeight.W500,
+                color = textColor
             )
+
 
         )
 
@@ -90,7 +100,7 @@ fun searchbar(
                 containerColor = CloudWhite
             )
         ) {
-            Text("Search")
+            Text("Search", color = textColor)
         }
     }
 }
@@ -100,16 +110,16 @@ fun Weathercard(
     weatherDto: WeatherDto
     ) {
     Spacer(modifier= Modifier.height(40.dp))
-    val temperature = weatherDto.main.temp.toInt()
+    val temperature = (weatherDto.main.temp - 273.15).toInt()
     val weathercondition = weatherDto.weather.firstOrNull()?.main?:"unknown"
     val weatherdescription = weatherDto.weather.firstOrNull()?.description?:"unknown"
     val humidity = weatherDto.main.humidity
     val windSpeed = weatherDto.wind.speed
 
     val gradientColors = listOf(
-        SkyBlue.copy(alpha = 0.7f ),
-        LightBlue.copy(alpha = 0.8f ),
-        CloudWhite.copy(alpha = 0.6f)
+        SkyBlue.copy(alpha = 1.4f ),
+        LightBlue.copy(alpha = 0.9f ),
+        CloudWhite.copy(alpha = 2.5f)
     )
 
 
@@ -140,12 +150,12 @@ fun Weathercard(
                     text = weatherDto.name,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                    color = Color.Black
                 )
                 Text(
                     text = weatherDto.sys.country,
                     fontSize = 24.sp,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
+                    color = Color.Black
                 )
             }
 
@@ -161,17 +171,17 @@ fun Weathercard(
                         text = "$temperature°C",
                         fontSize = 38.sp,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                        color = Color.Black
                     )
                     Text(
                         text = weathercondition,
                         fontSize = 18.sp,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                        color = Color.Black
                     )
                     Text(
                         text = weatherdescription,
                         fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
+                        color = Color.Black
                     )
                 }
 
@@ -179,7 +189,7 @@ fun Weathercard(
                     modifier = Modifier
                         .size(80.dp)
                         .clip(RoundedCornerShape(8.dp))
-                        .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)),
+                        .background(DeepBlue),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -242,18 +252,18 @@ fun WeatherdetailItem(
         Icon(painter = painterResource(id = iconResid),
             contentDescription = "$label",
             modifier= Modifier.size(24.dp),
-            tint = MaterialTheme.colorScheme.onPrimaryContainer
+            tint = Color.Black
         )
         Text(
             text = label,
             fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
+            color = Color.Black
         )
         Text(
             text = value,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onPrimaryContainer
+            color = Color.Black
         )
 
     }

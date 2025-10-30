@@ -17,7 +17,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import com.example.waetherapp.ui.theme.CloudWhite
+import com.example.waetherapp.ui.theme.DarkNightBlue
+import com.example.waetherapp.ui.theme.DeepSpaceBlue
 import com.example.waetherapp.ui.theme.LightBlue
+import com.example.waetherapp.ui.theme.MidnightGray
 import com.example.waetherapp.ui.theme.SkyBlue
 import kotlinx.serialization.json.JsonNull.content
 
@@ -26,28 +29,38 @@ fun Animatedweatherbackground(
     modifier: Modifier= Modifier,
     content:@Composable () -> Unit
 ) {
+    val isDark = androidx.compose.foundation.isSystemInDarkTheme()
     val infiniteTransition = rememberInfiniteTransition(label = "Weather background transistation")
     val coloranimation by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
-            tween(1000, easing = LinearEasing),
+            tween(2000, easing = LinearEasing),
             repeatMode = RepeatMode.Reverse
         ),
         label = "color_animation"
     )
 
-    val gradientColors = listOf(
-        SkyBlue.copy(alpha = 0.7f + (coloranimation * 0.2f)),
-        LightBlue.copy(alpha = 0.8f + (coloranimation * 0.3f)),
-        CloudWhite.copy(alpha = 0.6f)
-    )
+    val gradientColors = if (isDark) {
+        listOf(
+            DeepSpaceBlue.copy(alpha = 0.7f + (coloranimation * 0.2f)),
+            DarkNightBlue.copy(alpha = 0.7f + (coloranimation * 0.15f)),
+            DeepSpaceBlue.copy(alpha = 0.6f + (coloranimation * 0.2f)),
+        )
+    } else {
+        listOf(
+            SkyBlue.copy(alpha = 0.7f + (coloranimation  * 0.2f)),
+            LightBlue.copy(alpha = 0.9f + (coloranimation  * 0.3f)),
+            CloudWhite.copy(alpha = 0.7f)
+        )
+    }
 
     Box (
         modifier= Modifier.fillMaxSize()
             .background(
                 brush = Brush.verticalGradient(
                 colors = gradientColors
+
                 )
             )
     ){

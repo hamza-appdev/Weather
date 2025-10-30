@@ -2,6 +2,7 @@ package com.example.waetherapp.presentation
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +26,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -49,7 +51,9 @@ import com.example.waetherapp.presentation.components.Weathercard
 import com.example.waetherapp.presentation.components.searchbar
 import com.example.waetherapp.ui.theme.CloudWhite
 import com.example.waetherapp.ui.theme.LightBlue
+import com.example.waetherapp.ui.theme.LightGray
 import com.example.waetherapp.ui.theme.SkyBlue
+import com.example.waetherapp.ui.theme.StormGray
 import com.example.waetherapp.util.Resultt
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,6 +63,7 @@ fun WeatherScreen(viewModel: WeatherViewmodel) {
     val city = viewModel.city
     val snackbarHoststate = remember { SnackbarHostState() }
     val scroll = rememberScrollState()
+
 
     LaunchedEffect(key1 = viewModel.snackbarmessage) {
         viewModel.snackbarmessage?.let {
@@ -73,9 +78,9 @@ fun WeatherScreen(viewModel: WeatherViewmodel) {
                 title = {
                     Text(
                    text = "Weather App",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.W500,
+                        color =Color.White
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -140,6 +145,7 @@ fun WeatherScreen(viewModel: WeatherViewmodel) {
 
 @Composable
 fun Emptystate(modifier: Modifier = Modifier) {
+    val textColor = if (isSystemInDarkTheme()) LightGray else Color.Black
     Column(
         modifier= Modifier
             .fillMaxWidth()
@@ -167,14 +173,14 @@ fun Emptystate(modifier: Modifier = Modifier) {
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface
+            color =textColor
         )
         Spacer(modifier= Modifier.height(16.dp))
         androidx.compose.material3.Text(
             text ="Enter a city name above to see the current weather",
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = textColor
         )
 
     }
@@ -184,6 +190,7 @@ fun Emptystate(modifier: Modifier = Modifier) {
 
 @Composable
 fun Errormessage(message:String) {
+    val textColor = if (isSystemInDarkTheme()) LightGray else Color.Black
     Column(
         modifier= Modifier
             .fillMaxWidth()
@@ -210,14 +217,14 @@ fun Errormessage(message:String) {
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface
+            color =textColor
         )
         Spacer(modifier= Modifier.height(16.dp))
         androidx.compose.material3.Text(
             text =message,
             fontSize = 16.sp,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = textColor,
         )
 
     }

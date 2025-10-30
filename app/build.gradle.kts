@@ -35,9 +35,11 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField("String", "API_KEY", "\"$apikey\"")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String","API_KEY","\"$apikey\"")
 
     }
 
@@ -48,6 +50,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+
         }
     }
     compileOptions {
@@ -113,5 +118,7 @@ dependencies {
     ksp("com.google.dagger:hilt-android-compiler:2.57.1")
     implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
 
-    
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
+
+
 }
